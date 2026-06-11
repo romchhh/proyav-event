@@ -13,6 +13,7 @@
   display: flex;
   flex-direction: column;
   gap: 36px;
+  min-width: 0;
 }
 
 .header {
@@ -29,12 +30,17 @@
 }
 
 .trackWrap {
+  width: calc(100% + var(--section-px) * 2);
   margin-inline: calc(-1 * var(--section-px));
+  overflow: hidden;
 }
 
 .track {
   display: flex;
   gap: 20px;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
   overflow-x: auto;
   scroll-snap-type: x mandatory;
   -webkit-overflow-scrolling: touch;

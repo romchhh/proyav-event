@@ -59,6 +59,8 @@
   font-family: 'Montserrat', 'Helvetica Neue', sans-serif;
   background: var(--beige);
   color: var(--brown);
+  overflow-x: clip;
+  max-width: 100%;
 }
 
 .proyav-page .sectionInner {

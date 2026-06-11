@@ -7,7 +7,8 @@
   font-family: 'Montserrat', sans-serif;
   --logo-extra: 28px;
   padding-top: env(safe-area-inset-top, 0px);
-  overflow: visible;
+  overflow-x: clip;
+  overflow-y: visible;
   transition:
     background 0.3s ease,
     border-color 0.3s ease,
