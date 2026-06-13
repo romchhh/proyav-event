@@ -1,4 +1,5 @@
 import { createHmac } from 'crypto'
+import { getSiteUrl } from './site-url'
 
 const API_URL = 'https://api.wayforpay.com/api'
 
@@ -27,9 +28,8 @@ function getSecretKey() {
 }
 
 function getMerchantDomain() {
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL?.trim() ?? 'https://proyav.ua'
   try {
-    return new URL(siteUrl).hostname
+    return new URL(getSiteUrl()).hostname
   } catch {
     return 'proyav.ua'
   }

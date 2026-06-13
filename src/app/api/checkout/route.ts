@@ -5,6 +5,7 @@ import { getSalesCounts, saveOrder } from '@/lib/store'
 import { getSiteContent } from '@/lib/site-content'
 import type { TicketTierId } from '@/lib/tickets'
 import { createOrderReference, createWayForPayInvoice } from '@/lib/wayforpay'
+import { getSiteUrl } from '@/lib/site-url'
 
 type CheckoutBody = {
   tierId?: TicketTierId
@@ -73,7 +74,7 @@ export async function POST(request: Request) {
       amount = applyDiscount(pricing.price, promo.percent)
     }
 
-    const siteUrl = process.env.NEXT_PUBLIC_SITE_URL?.trim() ?? 'https://proyav.ua'
+    const siteUrl = getSiteUrl()
     const orderReference = createOrderReference()
     const orderDate = Math.floor(Date.now() / 1000)
 

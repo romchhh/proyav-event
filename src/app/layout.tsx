@@ -3,8 +3,9 @@ import CheckoutShell from './components/checkout/CheckoutShell'
 import './globals.css'
 import './proyav.css'
 import { ASSETS, EVENT } from './constants'
+import { getSiteUrl } from '@/lib/site-url'
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://proyav.ua'
+const siteUrl = getSiteUrl()
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),

@@ -1,12 +1,9 @@
 import { NextResponse } from 'next/server'
 import { fulfillApprovedPayment } from '@/lib/wayforpay-fulfillment'
 import { parseWayForPayCallbackBody } from '@/lib/wayforpay'
+import { getSiteOrigin } from '@/lib/site-url'
 
 export const dynamic = 'force-dynamic'
-
-function getSiteOrigin(request: Request) {
-  return process.env.NEXT_PUBLIC_SITE_URL?.trim() || new URL(request.url).origin
-}
 
 function buildSuccessRedirect(request: Request, orderReference: string) {
   const redirectUrl = new URL('/payment/success', getSiteOrigin(request))
