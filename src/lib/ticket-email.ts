@@ -1,5 +1,5 @@
 import QRCode from 'qrcode'
-import { EVENT, LINKS } from '@/app/constants'
+import { getSiteContent } from '@/lib/site-content'
 import { sendEmail } from './email'
 import type { StoredOrder } from './store'
 import {
@@ -17,6 +17,8 @@ function escapeHtml(value: string) {
 }
 
 export async function sendTicketEmail(order: StoredOrder) {
+  const content = await getSiteContent()
+  const { event, links } = content
   const qrPayload = getTicketQrPayload(order.orderReference)
   const invitationPng = await generateTicketInvitationPng(order)
   const filename = getTicketFilename(order.orderReference)
@@ -48,9 +50,11 @@ export async function sendTicketEmail(order: StoredOrder) {
               <td style="padding:28px 32px 12px;">
                 <p style="margin:0 0 6px;font-size:14px;color:#8a7d72;">Тариф</p>
                 <p style="margin:0 0 18px;font-size:22px;font-weight:700;color:#1a1210;">${escapeHtml(order.tierName)}</p>
+                <p style="margin:0 0 6px;font-size:14px;color:#8a7d72;">Код квитка</p>
+                <p style="margin:0 0 18px;font-size:20px;font-weight:700;color:#9a7858;letter-spacing:0.08em;">${escapeHtml(order.ticketCode ?? '—')}</p>
                 <p style="margin:0 0 6px;font-size:14px;color:#8a7d72;">Подія</p>
-                <p style="margin:0 0 6px;font-size:17px;font-weight:600;color:#1a1210;">${EVENT.dateShort}</p>
-                <p style="margin:0 0 18px;font-size:16px;color:#5c4a40;">${EVENT.venueFull} · ${EVENT.time}</p>
+                <p style="margin:0 0 6px;font-size:17px;font-weight:600;color:#1a1210;">${event.dateShort}</p>
+                <p style="margin:0 0 18px;font-size:16px;color:#5c4a40;">${event.venueFull} · ${event.time}</p>
                 <p style="margin:0 0 6px;font-size:14px;color:#8a7d72;">Номер замовлення</p>
                 <p style="margin:0 0 24px;font-size:15px;font-weight:600;color:#9a7858;letter-spacing:0.04em;">${escapeHtml(order.orderReference)}</p>
               </td>
@@ -73,8 +77,8 @@ export async function sendTicketEmail(order: StoredOrder) {
                   </p>
                 </div>
                 <p style="margin:24px 0 0;font-size:14px;line-height:1.7;color:#8a7d72;text-align:center;">
-                  Питання? <a href="mailto:${LINKS.email}" style="color:#9a7858;">${LINKS.email}</a>
-                  · <a href="${LINKS.telegram}" style="color:#9a7858;">Telegram</a>
+                  Питання? <a href="mailto:${links.email}" style="color:#9a7858;">${links.email}</a>
+                  · <a href="${links.telegram}" style="color:#9a7858;">Telegram</a>
                 </p>
               </td>
             </tr>
@@ -89,13 +93,14 @@ export async function sendTicketEmail(order: StoredOrder) {
     `Дякуємо за оплату, ${order.name}!`,
     '',
     `Тариф: ${order.tierName}`,
-    `Подія: ${EVENT.dateShort}, ${EVENT.venueFull}`,
+    `Код квитка: ${order.ticketCode ?? '—'}`,
+    `Подія: ${event.dateShort}, ${event.venueFull}`,
     `Номер замовлення: ${order.orderReference}`,
     '',
     `У вкладенні — файл-запрошення ${filename} з QR-кодом для входу.`,
     `Посилання на квиток: ${qrPayload}`,
     '',
-    `Питання: ${LINKS.email}`,
+    `Питання: ${links.email}`,
   ].join('\n')
 
   return sendEmail({

@@ -21,5 +21,6 @@ export async function GET(request: Request) {
     tierName: order.tierName,
     name: order.name,
     amount: order.amount,
+    ticketCode: order.ticketCode,
   })
 }

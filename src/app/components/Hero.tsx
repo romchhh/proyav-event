@@ -1,13 +1,16 @@
 import Image from 'next/image'
-import { ASSETS, EVENT } from '../constants'
+import type { SiteContent } from '@/lib/site-content/types'
+import MarkdownContent from '@/components/MarkdownContent'
 import styles from './Hero.module.css'
 
-export default function Hero() {
+export default function Hero({ content }: { content: SiteContent }) {
+  const { hero, event, assets } = content
+
   return (
     <section className={styles.hero}>
       <div className={styles.bg}>
         <Image
-          src={ASSETS.heroDesktop}
+          src={assets.heroDesktop}
           alt=""
           fill
           priority
@@ -15,7 +18,7 @@ export default function Hero() {
           className={`${styles.bgImage} ${styles.bgDesktop}`}
         />
         <Image
-          src={ASSETS.heroMobile}
+          src={assets.heroMobile}
           alt=""
           fill
           priority
@@ -31,30 +34,30 @@ export default function Hero() {
           <div className={styles.content}>
             <div className={styles.headlineWrap}>
               <h1 className={styles.headline}>
-                Подія у Тернополі
+                {hero.headlineLine1}
                 <br />
-                нового формату про <span>проявлення</span>
+                {hero.headlineLine2} <span>{hero.headlineAccent}</span>
               </h1>
             </div>
 
             <p className={styles.desc}>
-              <span className={styles.descBrand}>PROяв івент</span>
-              {' — для тих, хто готовий зростати, надихатись і діяти. '}
-              <span className={styles.descHighlight}>200+ учасників</span>
-              {', один насичений день для твого появу.'}
+              <span className={styles.descBrand}>{hero.descriptionBrand}</span>
+              <MarkdownContent inline>{hero.descriptionBefore}</MarkdownContent>
+              <span className={styles.descHighlight}>{hero.descriptionHighlight}</span>
+              <MarkdownContent inline>{hero.descriptionAfter}</MarkdownContent>
             </p>
 
             <p className={styles.badge}>
-              <span className={styles.dateHighlight}>{EVENT.dateShort}</span>
+              <span className={styles.dateHighlight}>{event.dateShort}</span>
               <span className={styles.badgeDot} aria-hidden="true" />
-              Подоляни Холл
+              {hero.badgeVenue}
               <span className={styles.badgeDot} aria-hidden="true" />
-              9–21
+              {hero.badgeTime}
             </p>
           </div>
 
           <a href="#kvitky" className={styles.ctaCard}>
-            <span className={styles.ctaText}>Купити квиток</span>
+            <span className={styles.ctaText}>{hero.cta}</span>
             <span className={styles.ctaArrow} aria-hidden="true">
               <svg width="20" height="20" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M2 14 L14 2 M6 2 H14 V10" />

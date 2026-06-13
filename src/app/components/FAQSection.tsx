@@ -1,9 +1,12 @@
 'use client'
+
 import { useState } from 'react'
-import { FAQ_ITEMS, LINKS } from '../constants'
+import type { SiteContent } from '@/lib/site-content/types'
+import MarkdownContent from '@/components/MarkdownContent'
 import styles from './FAQSection.module.css'
 
-export default function FAQSection() {
+export default function FAQSection({ content }: { content: SiteContent }) {
+  const { faq } = content
   const [openIndex, setOpenIndex] = useState<number | null>(0)
 
   return (
@@ -14,8 +17,9 @@ export default function FAQSection() {
         </div>
 
         <div className={styles.list}>
-          {FAQ_ITEMS.map((item, index) => {
+          {faq.map((item, index) => {
             const isOpen = openIndex === index
+
             return (
               <div key={item.question} className={`${styles.item} ${isOpen ? styles.open : ''}`}>
                 <button
@@ -33,17 +37,7 @@ export default function FAQSection() {
                 </button>
                 {isOpen && (
                   <div className={styles.answer}>
-                    <p>
-                      {item.question === 'До кого звертатись з питаннями?' ? (
-                        <>
-                          <a href={LINKS.telegram} target="_blank" rel="noopener noreferrer">Telegram-група</a>
-                          {' '}події або email:{' '}
-                          <a href={`mailto:${LINKS.email}`}>{LINKS.email}</a>
-                        </>
-                      ) : (
-                        item.answer
-                      )}
-                    </p>
+                    <MarkdownContent>{item.answer}</MarkdownContent>
                   </div>
                 )}
               </div>

@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
+import { getSiteContent } from '@/lib/site-content'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import { EVENT, LINKS } from '../constants'
@@ -10,10 +11,12 @@ export const metadata: Metadata = {
   description: 'Політика конфіденційності сайту PROяв івент. Як ми збираємо, використовуємо та захищаємо ваші персональні дані.',
 }
 
-export default function PrivacyPage() {
+export default async function PrivacyPage() {
+  const content = await getSiteContent()
+
   return (
     <div className={styles.page}>
-      <Navbar />
+      <Navbar content={content} />
       <main className={styles.main}>
         <article className={styles.inner}>
           <h1 className={styles.title}>Політика конфіденційності</h1>
@@ -254,7 +257,7 @@ export default function PrivacyPage() {
           </Link>
         </article>
       </main>
-      <Footer />
+      <Footer content={content} />
     </div>
   )
 }

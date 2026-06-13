@@ -195,7 +195,19 @@ export function parseWayForPayCallbackBody(raw: string, contentType: string) {
   const trimmed = raw.trim()
   if (!trimmed) return null
 
-  const isForm = contentType.includes('application/x-www-form-urlencoded')
+  if (trimmed.startsWith('{')) {
+    try {
+      return JSON.parse(trimmed) as WayForPayCallbackBody
+    } catch {
+      // fall through to form parsing
+    }
+  }
+
+  const isForm =
+    contentType.includes('application/x-www-form-urlencoded') ||
+    contentType.includes('multipart/form-data') ||
+    (!contentType.includes('json') && trimmed.includes('='))
+
   if (isForm) {
     const params = new URLSearchParams(trimmed)
     const body: WayForPayCallbackBody = {}
@@ -207,7 +219,7 @@ export function parseWayForPayCallbackBody(raw: string, contentType: string) {
         body[key as keyof WayForPayCallbackBody] = value
       }
     }
-    return body
+    return Object.keys(body).length > 0 ? body : null
   }
 
   try {

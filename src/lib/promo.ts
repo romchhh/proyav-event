@@ -1,10 +1,12 @@
+import { getSiteContent } from './site-content'
+
 export type PromoCode = {
   code: string
   percent: number
   label?: string
 }
 
-function parsePromoCodes(): PromoCode[] {
+function parseEnvPromoCodes(): PromoCode[] {
   const raw = process.env.PROMO_CODES?.trim()
   if (!raw) return []
 
@@ -25,18 +27,29 @@ function parsePromoCodes(): PromoCode[] {
   }
 }
 
-export function validatePromoCode(input: string): {
+async function getPromoCodes(): Promise<PromoCode[]> {
+  const content = await getSiteContent()
+  const fromContent = Object.entries(content.tickets.promoCodes).map(([code, percent]) => ({
+    code: code.toUpperCase(),
+    percent,
+  }))
+
+  if (fromContent.length > 0) return fromContent
+  return parseEnvPromoCodes()
+}
+
+export async function validatePromoCode(input: string): Promise<{
   valid: boolean
   percent?: number
   label?: string
   message: string
-} {
+}> {
   const code = input.trim().toUpperCase()
   if (!code) {
     return { valid: false, message: 'Введіть промокод' }
   }
 
-  const promo = parsePromoCodes().find((item) => item.code === code)
+  const promo = (await getPromoCodes()).find((item) => item.code === code)
   if (!promo) {
     return { valid: false, message: 'Промокод не знайдено' }
   }

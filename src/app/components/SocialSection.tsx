@@ -1,5 +1,6 @@
 import Image from 'next/image'
-import { ASSETS, LINKS } from '../constants'
+import type { SiteContent } from '@/lib/site-content/types'
+import MarkdownContent from '@/components/MarkdownContent'
 import styles from './SocialSection.module.css'
 
 function InstagramIcon() {
@@ -18,61 +19,37 @@ function TelegramIcon() {
   )
 }
 
-const SOCIAL = [
-  {
-    name: 'Instagram',
-    handle: '@proyavevent',
-    href: LINKS.instagram,
-    icon: InstagramIcon,
-  },
-  {
-    name: 'Telegram',
-    handle: 'Група події',
-    href: LINKS.telegram,
-    icon: TelegramIcon,
-  },
-  {
-    name: 'Threads',
-    handle: '@proyavevent',
-    href: LINKS.threads,
-    image: ASSETS.social.threads,
-  },
-]
+const ICONS: Record<string, React.ComponentType> = {
+  Instagram: InstagramIcon,
+  Telegram: TelegramIcon,
+}
 
-export default function SocialSection() {
+export default function SocialSection({ content }: { content: SiteContent }) {
+  const { social, assets } = content
+
   return (
     <section id="socmerezhi" className={styles.section}>
       <div className={`sectionInner ${styles.inner}`}>
-        <h2 className="sectionHeading">Слідкуй за оновленнями</h2>
-        <p className={styles.text}>
-          Анонси спікерів, спецпропозиції та все найважливіше про PROяв івент — у наших соцмережах.
-        </p>
+        <h2 className="sectionHeading">{social.heading}</h2>
+        <div className={styles.text}>
+          <MarkdownContent>{social.subheading}</MarkdownContent>
+        </div>
 
         <div className={styles.links}>
-          {SOCIAL.map((item) => {
-            const Icon = 'icon' in item ? item.icon : null
+          {social.items.map((item) => {
+            const Icon = ICONS[item.label]
+            const isThreads = item.label === 'Threads'
+
             return (
-              <a
-                key={item.name}
-                href={item.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={styles.link}
-              >
+              <a key={item.label} href={item.href} target="_blank" rel="noopener noreferrer" className={styles.link}>
                 <span className={styles.icon}>
-                  {'image' in item && item.image ? (
-                    <Image
-                      src={item.image}
-                      alt=""
-                      width={40}
-                      height={40}
-                      className={styles.iconImage}
-                    />
+                  {isThreads ? (
+                    <Image src={assets.social.threads} alt="" width={40} height={40} className={styles.iconImage} />
                   ) : Icon ? (
                     <Icon />
                   ) : null}
                 </span>
-                <span className={styles.name}>{item.name}</span>
+                <span className={styles.name}>{item.label}</span>
                 <span className={styles.handle}>{item.handle}</span>
               </a>
             )

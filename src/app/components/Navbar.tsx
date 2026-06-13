@@ -1,18 +1,18 @@
 'use client'
 import Image from 'next/image'
 import { useState, useEffect } from 'react'
-import { ASSETS, LINKS } from '../constants'
+import type { SiteContent } from '@/lib/site-content/types'
 import styles from './Navbar.module.css'
 
-const NAV_LINKS = [
-  { href: '#pro-podiyu', label: 'Про подію' },
-  { href: '#programa', label: 'Програма' },
-  { href: '#spikery', label: 'Спікери' },
-  { href: '#kvitky', label: 'Квитки' },
-  { href: '#faq', label: 'FAQ' },
-]
-
-export default function Navbar({ transparent = false }: { transparent?: boolean }) {
+export default function Navbar({
+  transparent = false,
+  content,
+}: {
+  transparent?: boolean
+  content: SiteContent
+}) {
+  const navLinks = content.navbar.links
+  const { assets, links, hero } = content
   const [menuOpen, setMenuOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
 
@@ -36,7 +36,7 @@ export default function Navbar({ transparent = false }: { transparent?: boolean 
         <nav className={styles.nav}>
           <a href="/" className={styles.brand}>
             <Image
-              src={ASSETS.logo}
+              src={assets.logo}
               alt="PROяв"
               width={400}
               height={184}
@@ -46,14 +46,14 @@ export default function Navbar({ transparent = false }: { transparent?: boolean 
           </a>
 
           <div className={styles.links}>
-            {NAV_LINKS.map((link) => (
+            {navLinks.map((link) => (
               <a key={link.href} href={link.href}>{link.label}</a>
             ))}
           </div>
 
           <div className={styles.actions}>
             <a
-              href={LINKS.instagram}
+              href={links.instagram}
               target="_blank"
               rel="noopener noreferrer"
               className={styles.social}
@@ -61,7 +61,7 @@ export default function Navbar({ transparent = false }: { transparent?: boolean 
               Instagram
             </a>
             <a href="#kvitky" className={styles.cta}>
-              <span>Купити квиток</span>
+              <span>{hero.cta}</span>
               <span className={styles.ctaArrow} aria-hidden="true">
                 <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M2 14 L14 2 M6 2 H14 V10" />
@@ -72,7 +72,7 @@ export default function Navbar({ transparent = false }: { transparent?: boolean 
 
           <div className={styles.mobileActions}>
             <a
-              href={LINKS.instagram}
+              href={links.instagram}
               target="_blank"
               rel="noopener noreferrer"
               className={styles.iconBtn}
@@ -84,7 +84,7 @@ export default function Navbar({ transparent = false }: { transparent?: boolean 
                 <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none" />
               </svg>
             </a>
-            <a href="#kvitky" className={styles.iconBtn} aria-label="Купити квиток">
+            <a href="#kvitky" className={styles.iconBtn} aria-label={hero.cta}>
               <svg width="18" height="18" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                 <path d="M2 14 L14 2 M6 2 H14 V10" />
               </svg>
@@ -110,13 +110,13 @@ export default function Navbar({ transparent = false }: { transparent?: boolean 
 
         <div className={styles.drawerBody}>
           <nav className={styles.drawerLinks} aria-label="Мобільна навігація">
-            {NAV_LINKS.map((link) => (
+            {navLinks.map((link) => (
               <a key={link.href} href={link.href} onClick={closeMenu}>{link.label}</a>
             ))}
           </nav>
 
           <a href="#kvitky" className={styles.drawerCta} onClick={closeMenu}>
-            <span>Купити квиток</span>
+            <span>{hero.cta}</span>
             <span className={styles.drawerCtaArrow} aria-hidden="true">
               <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M2 14 L14 2 M6 2 H14 V10" />
@@ -126,7 +126,7 @@ export default function Navbar({ transparent = false }: { transparent?: boolean 
         </div>
 
         <a
-          href={LINKS.instagram}
+          href={links.instagram}
           target="_blank"
           rel="noopener noreferrer"
           className={styles.drawerBottomIcon}

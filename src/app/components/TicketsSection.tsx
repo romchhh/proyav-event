@@ -1,16 +1,16 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { EVENT } from '../constants'
-import { WAVE_LABELS } from '@/lib/ticket-pricing'
-import { TICKET_TIERS, type TicketTierId } from '@/lib/tickets'
+import type { SiteContent } from '@/lib/site-content/types'
+import type { TicketTierId, TicketWave } from '@/lib/tickets'
+import MarkdownContent from '@/components/MarkdownContent'
 import OpenCheckoutButton from './checkout/OpenCheckoutButton'
 import styles from './TicketsSection.module.css'
 
 type TierPricing = {
   id: TicketTierId
   price: number
-  wave: keyof typeof WAVE_LABELS
+  wave: TicketWave
   remaining: number
   available: boolean
 }
@@ -19,16 +19,19 @@ function formatPrice(amount: number) {
   return new Intl.NumberFormat('uk-UA').format(amount)
 }
 
-export default function TicketsSection() {
+export default function TicketsSection({ content }: { content: SiteContent }) {
+  const { tickets, event } = content
   const [pricing, setPricing] = useState<TierPricing[]>([])
-  const [dateWave, setDateWave] = useState<keyof typeof WAVE_LABELS>('early')
+  const [dateWave, setDateWave] = useState<TicketWave>('early')
+  const [waveLabels, setWaveLabels] = useState(content.tickets.waveLabels)
 
   useEffect(() => {
     fetch('/api/tickets/pricing')
       .then((response) => response.json())
-      .then((data: { tiers: TierPricing[]; dateWave: keyof typeof WAVE_LABELS }) => {
+      .then((data: { tiers: TierPricing[]; dateWave: TicketWave; waveLabels: Record<TicketWave, string> }) => {
         setPricing(data.tiers)
         setDateWave(data.dateWave)
+        setWaveLabels(data.waveLabels)
       })
       .catch(() => {})
   }, [])
@@ -43,16 +46,15 @@ export default function TicketsSection() {
     <section id="kvitky" className={styles.section}>
       <div className={`sectionInner ${styles.inner}`}>
         <div className={styles.header}>
-          <p className={styles.kicker}>Квитки на PROяв івент</p>
-          <h2 className="sectionHeading">Варіанти участі</h2>
+          <h2 className="sectionHeading">{tickets.heading}</h2>
           <p className={styles.meta}>
-            {EVENT.dateShort} <span className={styles.dot} aria-hidden="true" /> {EVENT.venueFull}
+            {event.dateShort} <span className={styles.dot} aria-hidden="true" /> {event.venueFull}
           </p>
-          <p className={styles.waveBadge}>{WAVE_LABELS[dateWave]}</p>
+          <p className={styles.waveBadge}>{waveLabels[dateWave]}</p>
         </div>
 
         <div className={styles.grid}>
-          {TICKET_TIERS.map((tier) => {
+          {tickets.tiers.map((tier) => {
             const price = getPrice(tier.id)
             const available = isAvailable(tier.id)
 
@@ -77,7 +79,9 @@ export default function TicketsSection() {
                     <span className={styles.priceLoading}>...</span>
                   )}
                 </p>
-                <p className={styles.tierNote}>⚠️ {tier.limitNote}</p>
+                <div className={styles.tierNote}>
+                  ⚠️ <MarkdownContent inline>{tier.limitNote}</MarkdownContent>
+                </div>
                 <ul className={styles.features}>
                   {tier.features.map((feature) => (
                     <li
@@ -88,12 +92,12 @@ export default function TicketsSection() {
                     </li>
                   ))}
                 </ul>
-                {tier.tagline && <p className={styles.tagline}>{tier.tagline}</p>}
-                <OpenCheckoutButton
-                  tierId={tier.id}
-                  className={styles.buy}
-                  disabled={!available}
-                >
+                {tier.tagline && (
+                  <div className={styles.tagline}>
+                    <MarkdownContent inline>{tier.tagline}</MarkdownContent>
+                  </div>
+                )}
+                <OpenCheckoutButton tierId={tier.id} className={styles.buy} disabled={!available}>
                   {available ? 'Оплатити' : 'Немає в наявності'}
                   <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                     <path d="M2 14 L14 2 M6 2 H14 V10"/>

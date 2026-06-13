@@ -1,0 +1,1194 @@
+.adminRoot {
+  min-height: 100dvh;
+  background: #f4efe8;
+  color: #1a1210;
+  font-family: Montserrat, system-ui, sans-serif;
+}
+
+.adminRoot *,
+.adminRoot *::before,
+.adminRoot *::after {
+  box-sizing: border-box;
+}
+
+.adminRoot input,
+.adminRoot textarea,
+.adminRoot select,
+.adminRoot button {
+  font: inherit;
+}
+
+.adminRoot a {
+  color: inherit;
+}
+
+.adminContent {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-width: 920px;
+}
+
+.adminBlockPanel {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 22px;
+  background: #fff;
+  border: 1px solid #e8ddd2;
+  border-radius: 18px;
+}
+
+.adminBlockTitle {
+  margin: 0 0 4px;
+  font-size: 20px;
+  font-weight: 800;
+  color: #1a1210;
+}
+
+.adminField {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.adminField span {
+  font-size: 12px;
+  font-weight: 600;
+  color: #8a7d72;
+}
+
+.adminField input,
+.adminField textarea,
+.adminTicketsToolbar input,
+.adminTicketsToolbar select,
+.adminPromoArea {
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 12px;
+  border: 1.5px solid #e8ddd2;
+  background: #faf6f1;
+  color: #1a1210;
+}
+
+.adminField input:focus,
+.adminField textarea:focus,
+.adminTicketsToolbar input:focus,
+.adminTicketsToolbar select:focus,
+.adminPromoArea:focus {
+  outline: none;
+  border-color: #b8956f;
+}
+
+.adminImageField {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.adminImagePreview {
+  width: 120px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 10px;
+  border: 1px solid #e8ddd2;
+}
+
+.adminUploadBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: fit-content;
+  padding: 8px 14px;
+  border-radius: 999px;
+  background: #faf6f1;
+  border: 1.5px solid #e8ddd2;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.adminRowCard {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 14px;
+  border-radius: 14px;
+  background: #faf6f1;
+  border: 1px solid #efe5da;
+}
+
+.adminGhostBtn,
+.adminDangerBtn {
+  width: fit-content;
+  padding: 8px 14px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.adminGhostBtn {
+  border: 1.5px solid #e8ddd2;
+  background: #fff;
+  color: #5c4a40;
+}
+
+.adminDangerBtn {
+  border: none;
+  background: #fdecec;
+  color: #b42318;
+}
+
+.adminPriceRow {
+  display: grid;
+  grid-template-columns: 1fr 100px 100px;
+  gap: 8px;
+  align-items: center;
+  font-size: 13px;
+}
+
+.adminPriceRow input {
+  padding: 8px 10px;
+  border-radius: 10px;
+  border: 1.5px solid #e8ddd2;
+  background: #fff;
+}
+
+.adminMarkdownField textarea {
+  min-height: 120px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.adminMarkdownPreview {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 14px;
+  border-radius: 12px;
+  background: #fff;
+  border: 1.5px dashed #e8ddd2;
+}
+
+.adminMarkdownPreviewLabel {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #9a7858;
+}
+
+.adminMarkdownPreview .markdown {
+  font-size: 14px;
+  line-height: 1.65;
+  color: #1a1210;
+}
+
+.adminMarkdownPreview .markdown a {
+  color: #9a7858;
+}
+
+.adminHint {
+  margin: 0;
+  font-size: 13px;
+  color: #8a7d72;
+}
+
+.adminTickets {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  max-width: 1100px;
+}
+
+.adminTicketsViewSwitch {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.adminTicketsView,
+.adminTicketsViewActive {
+  padding: 10px 16px;
+  border-radius: 999px;
+  border: 1.5px solid #e8ddd2;
+  background: #fff;
+  font-size: 14px;
+  font-weight: 700;
+  color: #5c4a40;
+  cursor: pointer;
+}
+
+.adminTicketsViewActive {
+  background: #1a1210;
+  border-color: #1a1210;
+  color: #fff;
+}
+
+.adminCheckIn {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  max-width: 760px;
+}
+
+.adminCheckInIntro {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.adminCheckInScanBtn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  width: 100%;
+  min-height: 112px;
+  padding: 20px 24px;
+  border-radius: 22px;
+  border: none;
+  background: linear-gradient(135deg, #1a1210 0%, #3d2e26 100%);
+  color: #fff;
+  cursor: pointer;
+  box-shadow: 0 10px 28px rgba(26, 18, 16, 0.22);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.adminCheckInScanBtn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 14px 32px rgba(26, 18, 16, 0.28);
+}
+
+.adminCheckInScanBtnActive {
+  background: linear-gradient(135deg, #b42318 0%, #8f1d13 100%);
+  box-shadow: 0 10px 28px rgba(180, 35, 24, 0.25);
+}
+
+.adminCheckInScanBtnIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.adminCheckInScanBtnText {
+  font-size: 22px;
+  font-weight: 800;
+  letter-spacing: 0.01em;
+}
+
+.adminCheckInScanBtnHint {
+  font-size: 13px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.78);
+}
+
+.adminCheckInToolbar {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 10px;
+}
+
+.adminCheckInToolbar input {
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 12px;
+  border: 1.5px solid #e8ddd2;
+  background: #faf6f1;
+  color: #1a1210;
+}
+
+.adminQrReaderWrap {
+  overflow: hidden;
+  border-radius: 18px;
+  border: 1px solid #e8ddd2;
+  background: #000;
+}
+
+.adminQrReader {
+  width: 100%;
+  min-height: 320px;
+}
+
+.adminCheckInCard {
+  padding: 18px 20px;
+  border-radius: 18px;
+  background: #fff;
+  border: 1px solid #e8ddd2;
+}
+
+.adminCheckInCard-admitted {
+  border-color: #b7dfc0;
+  background: #f7fcf8;
+}
+
+.adminCheckInCard-rejected {
+  border-color: #f2c6c6;
+  background: #fff8f8;
+}
+
+.adminCheckInBadges {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 6px;
+}
+
+.adminCheckInStatus {
+  padding: 6px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.adminCheckInStatus-none {
+  background: #faf6f1;
+  color: #8a7d72;
+}
+
+.adminCheckInStatus-admitted {
+  background: #edf7ef;
+  color: #2f6b3b;
+}
+
+.adminCheckInStatus-rejected {
+  background: #fdecec;
+  color: #b42318;
+}
+
+.adminCheckInActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 4px;
+}
+
+.adminCheckInAdmit,
+.adminCheckInReject {
+  padding: 12px 18px;
+  border-radius: 999px;
+  border: none;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.adminCheckInAdmit {
+  background: linear-gradient(135deg, #6b8f71 0%, #4f7455 100%);
+  color: #fff;
+}
+
+.adminCheckInAdmit:disabled,
+.adminCheckInReject:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.adminCheckInReject {
+  background: #fdecec;
+  color: #b42318;
+}
+
+.adminCheckInMessage {
+  margin: 0;
+  padding: 12px 14px;
+  border-radius: 12px;
+  background: #fff7e8;
+  color: #9a6200;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.adminCheckInSuccess {
+  margin: 0;
+  padding: 12px 14px;
+  border-radius: 12px;
+  background: #edf7ef;
+  color: #2f6b3b;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.adminCheckInError {
+  margin: 0;
+  color: #b42318;
+  font-size: 14px;
+}
+
+.adminCheckInStats {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.adminCheckInStat {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 14px 12px;
+  border-radius: 16px;
+  border: 1.5px solid #e8ddd2;
+  background: #fff;
+  cursor: pointer;
+  text-align: left;
+}
+
+.adminCheckInStat strong {
+  font-size: 24px;
+  color: #1a1210;
+}
+
+.adminCheckInStat span {
+  font-size: 12px;
+  color: #8a7d72;
+}
+
+.adminCheckInStatAccent {
+  background: linear-gradient(135deg, #1a1210 0%, #3d2e26 100%);
+  border-color: transparent;
+  color: #fff;
+}
+
+.adminCheckInStatAccent strong,
+.adminCheckInStatAccent span {
+  color: #fff;
+}
+
+.adminVerdict {
+  padding: 24px;
+  border-radius: 22px;
+  border: 2px solid transparent;
+}
+
+.adminVerdict-ok {
+  background: linear-gradient(180deg, #f3fbf5 0%, #e8f5eb 100%);
+  border-color: #9fd0a8;
+}
+
+.adminVerdict-bad,
+.adminVerdict-already_used,
+.adminVerdict-not_found,
+.adminVerdict-not_paid,
+.adminVerdict-rejected {
+  background: linear-gradient(180deg, #fff7f7 0%, #fdeeee 100%);
+  border-color: #efb4b4;
+}
+
+.adminVerdict-valid.adminVerdict-ok {
+  background: linear-gradient(180deg, #f3fbf5 0%, #dff3e4 100%);
+}
+
+.adminVerdictTop {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.adminVerdictBadge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 88px;
+  padding: 10px 18px;
+  border-radius: 999px;
+  font-size: 28px;
+  font-weight: 900;
+  letter-spacing: 0.04em;
+}
+
+.adminVerdict-ok .adminVerdictBadge {
+  background: #2f6b3b;
+  color: #fff;
+}
+
+.adminVerdict-bad .adminVerdictBadge,
+.adminVerdict-already_used .adminVerdictBadge,
+.adminVerdict-not_found .adminVerdictBadge,
+.adminVerdict-not_paid .adminVerdictBadge,
+.adminVerdict-rejected .adminVerdictBadge {
+  background: #b42318;
+  color: #fff;
+}
+
+.adminVerdictCode {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #8a7d72;
+}
+
+.adminVerdictName {
+  margin: 0;
+  font-size: clamp(28px, 5vw, 40px);
+  font-weight: 800;
+  line-height: 1.1;
+  color: #1a1210;
+}
+
+.adminVerdictTier {
+  margin: 8px 0 0;
+  font-size: clamp(20px, 3vw, 28px);
+  font-weight: 700;
+  color: #9a7858;
+}
+
+.adminVerdictMeta {
+  margin: 10px 0 0;
+  font-size: 14px;
+  color: #5c4a40;
+}
+
+.adminVerdictMessage {
+  margin: 14px 0 0;
+  font-size: 16px;
+  font-weight: 600;
+  color: #1a1210;
+}
+
+.adminVerdictRepeat {
+  margin: 10px 0 0;
+  padding: 10px 12px;
+  border-radius: 12px;
+  background: rgba(180, 35, 24, 0.08);
+  color: #b42318;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.adminCheckInListSection {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.adminCheckInListTitle {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 800;
+}
+
+.adminCheckInTier {
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: #faf6f1;
+  font-size: 12px;
+  font-weight: 700;
+  color: #9a7858;
+  white-space: nowrap;
+}
+
+.adminTicketCardCompact {
+  padding: 14px 16px;
+}
+
+.adminScanFeed {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.adminScanItem {
+  padding: 14px 16px;
+  border-radius: 14px;
+  background: #fff;
+  border: 1px solid #e8ddd2;
+}
+
+.adminScanItem-valid {
+  border-color: #c9e3cf;
+}
+
+.adminScanItem-already_used,
+.adminScanItem-not_found,
+.adminScanItem-not_paid,
+.adminScanItem-rejected {
+  border-color: #f2c6c6;
+}
+
+.adminScanItemHead {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  align-items: center;
+}
+
+.adminScanItemHead strong {
+  font-size: 16px;
+}
+
+.adminScanOk {
+  color: #2f6b3b;
+  font-weight: 800;
+}
+
+.adminScanBad {
+  color: #b42318;
+  font-weight: 800;
+}
+
+.adminScanItemTier {
+  margin: 4px 0 0;
+  font-size: 14px;
+  font-weight: 700;
+  color: #9a7858;
+}
+
+.adminScanItemMeta,
+.adminScanItemMessage {
+  margin: 4px 0 0;
+  font-size: 13px;
+  color: #8a7d72;
+}
+
+.adminPromoPage {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  max-width: 860px;
+}
+
+.adminPromoIntro {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.adminPromoCreate {
+  display: grid;
+  grid-template-columns: 1.4fr 0.6fr auto;
+  gap: 12px;
+  align-items: end;
+  padding: 18px;
+  border-radius: 18px;
+  background: #fff;
+  border: 1px solid #e8ddd2;
+}
+
+.adminPromoCreateActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.adminPromoToolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.adminDirtyInline {
+  font-size: 13px;
+  font-weight: 700;
+  color: #9a6200;
+}
+
+.adminSaveInline {
+  padding: 10px 16px;
+  border: none;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #c9a87c 0%, #9a7858 100%);
+  color: #fff;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.adminSaveInline:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.adminPromoList {
+  display: grid;
+  gap: 12px;
+}
+
+.adminPromoCard {
+  padding: 16px 18px;
+  border-radius: 16px;
+  background: #fff;
+  border: 1px solid #e8ddd2;
+}
+
+.adminPromoCardHead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.adminPromoCardBody {
+  display: grid;
+  grid-template-columns: 180px 1fr;
+  gap: 16px;
+  align-items: start;
+}
+
+.adminPromoStats {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.adminPromoStats p {
+  margin: 0;
+  padding: 12px 14px;
+  border-radius: 12px;
+  background: #faf6f1;
+}
+
+.adminPromoStats span {
+  display: block;
+  margin-bottom: 4px;
+  font-size: 12px;
+  color: #8a7d72;
+}
+
+.adminPromoStats strong {
+  font-size: 18px;
+  color: #1a1210;
+}
+
+@media (max-width: 900px) {
+  .adminPromoCreate,
+  .adminPromoCardBody {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 900px) {
+  .adminCheckInStats {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.adminStats {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.adminStats div {
+  padding: 16px;
+  border-radius: 16px;
+  background: #fff;
+  border: 1px solid #e8ddd2;
+}
+
+.adminStats strong {
+  display: block;
+  font-size: 28px;
+  color: #1a1210;
+}
+
+.adminStats span {
+  font-size: 13px;
+  color: #8a7d72;
+}
+
+.adminTicketsToolbar {
+  display: grid;
+  grid-template-columns: 1fr 180px;
+  gap: 10px;
+}
+
+.adminTicketList {
+  display: grid;
+  gap: 12px;
+}
+
+.adminTicketCard {
+  padding: 16px 18px;
+  border-radius: 16px;
+  background: #fff;
+  border: 1px solid #e8ddd2;
+}
+
+.adminTicketHead {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  align-items: flex-start;
+  margin-bottom: 12px;
+}
+
+.adminTicketCode {
+  margin: 0 0 4px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #9a7858;
+}
+
+.adminTicketHead h3 {
+  margin: 0;
+  font-size: 18px;
+}
+
+.adminStatus {
+  padding: 6px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.adminStatus-paid {
+  background: #edf7ef;
+  color: #2f6b3b;
+}
+
+.adminStatus-pending {
+  background: #fff7e8;
+  color: #9a6200;
+}
+
+.adminStatus-failed {
+  background: #fdecec;
+  color: #b42318;
+}
+
+.adminTicketMeta {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px 16px;
+}
+
+.adminTicketMeta p {
+  margin: 0;
+  font-size: 14px;
+  color: #1a1210;
+}
+
+.adminTicketMeta span {
+  display: block;
+  font-size: 11px;
+  font-weight: 600;
+  color: #8a7d72;
+  margin-bottom: 2px;
+}
+
+@media (max-width: 768px) {
+  .adminTicketsToolbar,
+  .adminCheckInToolbar {
+    grid-template-columns: 1fr;
+  }
+
+  .adminTicketMeta {
+    grid-template-columns: 1fr;
+  }
+
+  .adminPriceRow {
+    grid-template-columns: 1fr;
+  }
+}
+
+.adminAnalytics {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  max-width: 1180px;
+}
+
+.adminKpiGrid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.adminKpiCard {
+  padding: 18px 20px;
+  border-radius: 18px;
+  background: #fff;
+  border: 1px solid #e8ddd2;
+}
+
+.adminKpiCardAccent {
+  background: linear-gradient(135deg, #1a1210 0%, #3d2e26 100%);
+  border-color: transparent;
+  color: #fff;
+}
+
+.adminKpiCardAccent .adminKpiLabel,
+.adminKpiCardAccent .adminKpiHint {
+  color: rgba(255, 255, 255, 0.72);
+}
+
+.adminKpiLabel {
+  margin: 0 0 8px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #8a7d72;
+}
+
+.adminKpiValue {
+  margin: 0;
+  font-size: clamp(24px, 4vw, 34px);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+}
+
+.adminKpiHint {
+  margin: 8px 0 0;
+  font-size: 13px;
+  color: #8a7d72;
+}
+
+.adminAnalyticsGrid {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 14px;
+}
+
+.adminPanel {
+  padding: 20px 22px;
+  border-radius: 20px;
+  background: #fff;
+  border: 1px solid #e8ddd2;
+}
+
+.adminPanelCompact {
+  padding-bottom: 16px;
+}
+
+.adminPanelHead h2 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 800;
+  color: #1a1210;
+}
+
+.adminPanelHead p {
+  margin: 6px 0 0;
+  font-size: 13px;
+  color: #8a7d72;
+}
+
+.adminTierStats,
+.adminRecentList,
+.adminPromoList {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-top: 18px;
+}
+
+.adminTierRowHead,
+.adminRecentItem,
+.adminPromoItem {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  align-items: center;
+}
+
+.adminTierRowHead span,
+.adminTierMeta,
+.adminWaveLabel,
+.adminRecentTier {
+  font-size: 13px;
+  color: #8a7d72;
+}
+
+.adminTierRowHead strong,
+.adminWaveRevenue,
+.adminRecentAside strong,
+.adminPromoItem strong {
+  color: #1a1210;
+}
+
+.adminProgressTrack {
+  height: 10px;
+  margin: 10px 0 6px;
+  border-radius: 999px;
+  background: #faf6f1;
+  overflow: hidden;
+}
+
+.adminProgressFill {
+  height: 100%;
+  border-radius: inherit;
+}
+
+.adminProgressFill-standard {
+  background: linear-gradient(90deg, #6b8f71, #8eb894);
+}
+
+.adminProgressFill-golden {
+  background: linear-gradient(90deg, #c9a227, #e0bb4d);
+}
+
+.adminProgressFill-vip {
+  background: linear-gradient(90deg, #9a7858, #c9a87c);
+}
+
+.adminWaveStats {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.adminWaveCard {
+  padding: 14px 16px;
+  border-radius: 14px;
+  background: #faf6f1;
+}
+
+.adminWaveValue {
+  margin: 4px 0;
+  font-size: 24px;
+  font-weight: 800;
+}
+
+.adminWaveValue span {
+  font-size: 14px;
+  font-weight: 600;
+  color: #8a7d72;
+}
+
+.adminChart {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(42px, 1fr));
+  gap: 10px;
+  align-items: end;
+  min-height: 220px;
+  margin-top: 18px;
+}
+
+.adminChartColumn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+}
+
+.adminChartBarWrap {
+  width: 100%;
+  height: 150px;
+  display: flex;
+  align-items: flex-end;
+}
+
+.adminChartBar {
+  width: 100%;
+  border-radius: 10px 10px 4px 4px;
+  background: linear-gradient(180deg, #c9a87c 0%, #9a7858 100%);
+  min-height: 12px;
+}
+
+.adminChartCount {
+  margin: 0;
+  font-size: 12px;
+  font-weight: 700;
+  color: #9a7858;
+}
+
+.adminChartLabel {
+  margin: 0;
+  font-size: 11px;
+  color: #8a7d72;
+  text-align: center;
+}
+
+.adminRecentItem {
+  padding: 12px 0;
+  border-bottom: 1px solid #efe5da;
+}
+
+.adminRecentItem:last-child {
+  border-bottom: none;
+}
+
+.adminRecentCode {
+  margin: 0 0 4px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #9a7858;
+}
+
+.adminRecentName {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.adminRecentAside {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 4px;
+  text-align: right;
+}
+
+.adminRecentAside span {
+  font-size: 12px;
+  color: #8a7d72;
+}
+
+.adminPromoItem {
+  padding: 12px 14px;
+  border-radius: 12px;
+  background: #faf6f1;
+}
+
+.adminPromoCode {
+  font-weight: 800;
+  color: #1a1210;
+}
+
+.adminQuickStats {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.adminQuickStats div {
+  padding: 14px;
+  border-radius: 14px;
+  background: #faf6f1;
+}
+
+.adminQuickStats span {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 12px;
+  color: #8a7d72;
+}
+
+.adminQuickStats strong {
+  font-size: 20px;
+  color: #1a1210;
+}
+
+@media (max-width: 1024px) {
+  .adminKpiGrid,
+  .adminQuickStats {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .adminAnalyticsGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .adminKpiGrid,
+  .adminQuickStats {
+    grid-template-columns: 1fr;
+  }
+}

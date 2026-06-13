@@ -44,7 +44,10 @@ export async function sendEmail(
       html: options.html ?? undefined,
       attachments: options.attachments?.map((attachment) => ({
         filename: attachment.filename,
-        content: attachment.content,
+        content:
+          attachment.content instanceof Buffer
+            ? attachment.content.toString('base64')
+            : attachment.content,
         contentType: attachment.contentType,
       })),
     })

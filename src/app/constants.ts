@@ -16,7 +16,8 @@ export const LINKS = {
   email: 'proYav.event@gmail.com',
   privacy: '/privacy',
   telebots: 'https://telebots.site/',
-  becomeSpeaker: 'mailto:proYav.event@gmail.com?subject=Стати спікером PROяв івент',
+  becomeSpeaker:
+    'https://docs.google.com/forms/d/e/1FAIpQLSdQnpsltXoUW723MwkQkJsFs1kNy8Tipqt717fvjPMmDecgJg/viewform?usp=header',
   becomePartner: 'mailto:proYav.event@gmail.com?subject=Стати партнером PROяв івент',
 } as const
 
@@ -150,6 +151,6 @@ export const FAQ_ITEMS = [
   },
   {
     question: 'До кого звертатись з питаннями?',
-    answer: `Telegram-група події або email: ${LINKS.email}`,
+    answer: `[Telegram-група події](${LINKS.telegram}) або email: [${LINKS.email}](mailto:${LINKS.email})`,
   },
 ] as const

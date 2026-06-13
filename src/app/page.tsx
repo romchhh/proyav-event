@@ -1,3 +1,5 @@
+import { getSiteContent } from '@/lib/site-content'
+import type { SiteContent } from '@/lib/site-content/types'
 import Navbar from './components/Navbar'
 import Hero from './components/Hero'
 import AboutSection from './components/AboutSection'
@@ -12,24 +14,44 @@ import FAQSection from './components/FAQSection'
 import SocialSection from './components/SocialSection'
 import Footer from './components/Footer'
 
-export default function Home() {
+export async function generateMetadata() {
+  const content = await getSiteContent()
+  return {
+    title: content.metadata.title,
+    description: content.metadata.description,
+    openGraph: {
+      title: content.metadata.title,
+      description: content.metadata.description,
+    },
+    twitter: {
+      title: content.metadata.title,
+      description: content.metadata.description,
+    },
+  }
+}
+
+export default async function Home() {
+  const content = await getSiteContent()
+
   return (
     <>
-      <Navbar transparent />
+      <Navbar transparent content={content} />
       <main>
-        <Hero />
-        <AboutSection />
-        <OrganizersSection />
-        <GallerySection />
-        <ScheduleSection />
-        <SpeakersSection />
-        <PartnersSection />
-        <TicketsSection />
-        <VenueSection />
-        <FAQSection />
-        <SocialSection />
+        <Hero content={content} />
+        <AboutSection content={content} />
+        <OrganizersSection content={content} />
+        <GallerySection content={content} />
+        <ScheduleSection content={content} />
+        <SpeakersSection content={content} />
+        <PartnersSection content={content} />
+        <TicketsSection content={content} />
+        <VenueSection content={content} />
+        <FAQSection content={content} />
+        <SocialSection content={content} />
       </main>
-      <Footer />
+      <Footer content={content} />
     </>
   )
 }
+
+export type { SiteContent }

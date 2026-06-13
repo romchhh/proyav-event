@@ -1,13 +1,17 @@
 import { NextResponse } from 'next/server'
-import { getAllTierPricing } from '@/lib/ticket-pricing'
+import { getSiteContent } from '@/lib/site-content'
+import { getAllTierPricing, getPricingConfigFromContent } from '@/lib/ticket-pricing'
 import { getSalesCounts } from '@/lib/store'
-import { TICKET_TIERS } from '@/lib/tickets'
+
+export const dynamic = 'force-dynamic'
 
 export async function GET() {
+  const content = await getSiteContent()
   const sales = await getSalesCounts()
-  const pricing = getAllTierPricing(sales)
+  const pricingConfig = getPricingConfigFromContent(content.tickets)
+  const pricing = getAllTierPricing(sales, pricingConfig)
 
-  const tiers = TICKET_TIERS.map((tier) => {
+  const tiers = content.tickets.tiers.map((tier) => {
     const priceInfo = pricing.tiers.find((item) => item.tierId === tier.id)
     return {
       id: tier.id,
@@ -21,6 +25,7 @@ export async function GET() {
 
   return NextResponse.json({
     dateWave: pricing.dateWave,
+    waveLabels: content.tickets.waveLabels,
     tiers,
   })
 }

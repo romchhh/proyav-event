@@ -1,8 +1,9 @@
 import { NextResponse } from 'next/server'
 import { applyDiscount, validatePromoCode } from '@/lib/promo'
-import { getTierPrice, isTierAvailable } from '@/lib/ticket-pricing'
+import { getPricingConfigFromContent, getTierPrice, isTierAvailable } from '@/lib/ticket-pricing'
 import { getSalesCounts, saveOrder } from '@/lib/store'
-import { getTicketTier, type TicketTierId } from '@/lib/tickets'
+import { getSiteContent } from '@/lib/site-content'
+import type { TicketTierId } from '@/lib/tickets'
 import { createOrderReference, createWayForPayInvoice } from '@/lib/wayforpay'
 
 type CheckoutBody = {
@@ -28,7 +29,11 @@ function isValidEmail(email: string) {
 export async function POST(request: Request) {
   try {
     const body = (await request.json()) as CheckoutBody
-    const tier = body.tierId ? getTicketTier(body.tierId) : undefined
+    const content = await getSiteContent()
+    const pricingConfig = getPricingConfigFromContent(content.tickets)
+    const tier = body.tierId
+      ? content.tickets.tiers.find((item) => item.id === body.tierId)
+      : undefined
     const name = body.name?.trim() ?? ''
     const email = body.email?.trim() ?? ''
     const phone = normalizePhone(body.phone?.trim() ?? '')
@@ -51,16 +56,16 @@ export async function POST(request: Request) {
     }
 
     const sales = await getSalesCounts()
-    if (!isTierAvailable(body.tierId, sales)) {
+    if (!isTierAvailable(body.tierId, sales, pricingConfig)) {
       return NextResponse.json({ error: 'Квитки цього тарифу вже розкуплені' }, { status: 409 })
     }
 
-    const pricing = getTierPrice(body.tierId, sales)
+    const pricing = getTierPrice(body.tierId, sales, pricingConfig)
     let amount = pricing.price
     let discountPercent = 0
 
     if (promoCode) {
-      const promo = validatePromoCode(promoCode)
+      const promo = await validatePromoCode(promoCode)
       if (!promo.valid || promo.percent === undefined) {
         return NextResponse.json({ error: promo.message }, { status: 400 })
       }
@@ -85,6 +90,7 @@ export async function POST(request: Request) {
       status: 'pending',
       emailSent: false,
       createdAt: new Date().toISOString(),
+      checkInStatus: 'none',
     })
 
     const invoice = await createWayForPayInvoice({
@@ -95,7 +101,7 @@ export async function POST(request: Request) {
       clientFirstName: name,
       clientEmail: email,
       clientPhone: phone,
-      returnUrl: `${siteUrl}/payment/success?orderReference=${encodeURIComponent(orderReference)}`,
+      returnUrl: `${siteUrl}/api/wayforpay/return?orderReference=${encodeURIComponent(orderReference)}`,
       serviceUrl: `${siteUrl}/api/wayforpay/callback`,
     })
 

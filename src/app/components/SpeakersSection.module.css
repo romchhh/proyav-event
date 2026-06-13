@@ -165,6 +165,10 @@
   z-index: 1;
 }
 
+.photoImage {
+  object-fit: cover;
+}
+
 .photoEmpty {
   aspect-ratio: 1;
   background: var(--beige-warm);

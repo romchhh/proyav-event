@@ -1,0 +1,144 @@
+.page {
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 32px 20px;
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(160deg, #1a1210 0%, #3d2e26 45%, #f4efe8 45%);
+}
+
+.glow {
+  position: absolute;
+  width: 420px;
+  height: 420px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(184, 149, 111, 0.35) 0%, transparent 70%);
+  top: 8%;
+  right: -80px;
+  pointer-events: none;
+}
+
+.card {
+  width: 100%;
+  max-width: 440px;
+  padding: 40px 36px;
+  border-radius: 28px;
+  background: rgba(255, 255, 255, 0.96);
+  border: 1px solid rgba(232, 221, 210, 0.9);
+  box-shadow: 0 24px 60px rgba(26, 18, 16, 0.18);
+  position: relative;
+  z-index: 1;
+}
+
+.eyebrow {
+  margin: 0 0 8px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #9a7858;
+}
+
+.title {
+  margin: 0;
+  font-size: clamp(28px, 5vw, 34px);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: #1a1210;
+}
+
+.lead {
+  margin: 12px 0 28px;
+  font-size: 15px;
+  line-height: 1.6;
+  color: #5c4a40;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.field span {
+  font-size: 13px;
+  font-weight: 600;
+  color: #5c4a40;
+}
+
+.field input {
+  width: 100%;
+  padding: 14px 16px;
+  border-radius: 14px;
+  border: 1.5px solid #e8ddd2;
+  background: #faf6f1;
+  color: #1a1210;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.field input:focus {
+  outline: none;
+  border-color: #b8956f;
+  box-shadow: 0 0 0 3px rgba(184, 149, 111, 0.18);
+}
+
+.remember {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+  color: #5c4a40;
+  cursor: pointer;
+}
+
+.remember input {
+  width: 18px;
+  height: 18px;
+  accent-color: #9a7858;
+}
+
+.error {
+  margin: 0;
+  font-size: 14px;
+  color: #b42318;
+}
+
+.submit {
+  margin-top: 4px;
+  padding: 15px 20px;
+  border: none;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #c9a87c 0%, #9a7858 100%);
+  color: #fff;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.2s, opacity 0.2s;
+}
+
+.submit:hover:not(:disabled) {
+  transform: translateY(-1px);
+}
+
+.submit:disabled {
+  opacity: 0.7;
+  cursor: wait;
+}
+
+@media (max-width: 640px) {
+  .page {
+    background: linear-gradient(180deg, #1a1210 0%, #3d2e26 28%, #f4efe8 28%);
+  }
+
+  .card {
+    padding: 32px 24px;
+  }
+}

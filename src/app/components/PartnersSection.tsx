@@ -1,22 +1,24 @@
-import { LINKS } from '../constants'
+import type { SiteContent } from '@/lib/site-content/types'
+import MarkdownContent from '@/components/MarkdownContent'
 import styles from './PartnersSection.module.css'
 
-export default function PartnersSection() {
+export default function PartnersSection({ content }: { content: SiteContent }) {
+  const { partners, links } = content
+
   return (
     <section id="partnery" className={styles.section}>
       <div className={`sectionInner ${styles.inner}`}>
         <div className={styles.card}>
-          <h2 className={styles.heading}>Партнери</h2>
-          <p className={styles.text}>
-            PROяв івент — простір для брендів і проєктів, які розділяють наші цінності.
-            Хочеш долучитись як партнер події?
-          </p>
-          <a href={LINKS.becomePartner} className={styles.cta}>
+          <h2 className={styles.heading}>{partners.heading}</h2>
+          <div className={styles.text}>
+            <MarkdownContent>{partners.subheading}</MarkdownContent>
+          </div>
+          <a href={links.becomePartner} className={styles.cta}>
             <span className={styles.ctaPlus} aria-hidden="true">+</span>
-            Стати партнером події
+            {partners.cta}
           </a>
-          <a href={`mailto:${LINKS.email}`} className={styles.email}>
-            {LINKS.email}
+          <a href={`mailto:${links.email}`} className={styles.email}>
+            {links.email}
           </a>
         </div>
       </div>

@@ -31,6 +31,17 @@ function SuccessContent() {
       const data = (await response.json()) as OrderStatus
       setOrderStatus(data)
 
+      if (data.status === 'paid' && data.emailSent === false) {
+        await fetch('/api/orders/ensure-ticket', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ orderReference }),
+        })
+        const refreshed = await fetch(`/api/orders/status?orderReference=${encodeURIComponent(orderReference)}`)
+        const refreshedData = (await refreshed.json()) as OrderStatus
+        setOrderStatus(refreshedData)
+      }
+
       if (data.status !== 'paid' && attempts < 8) {
         attempts += 1
         window.setTimeout(poll, 2500)

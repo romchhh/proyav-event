@@ -2,7 +2,8 @@
 
 import Image from 'next/image'
 import { useCallback, useEffect, useRef, useState } from 'react'
-import { GALLERY_IMAGES } from '../constants'
+import type { SiteContent } from '@/lib/site-content/types'
+import MarkdownContent from '@/components/MarkdownContent'
 import styles from './GallerySection.module.css'
 
 function CloseIcon() {
@@ -21,7 +22,8 @@ function ArrowIcon() {
   )
 }
 
-export default function GallerySection() {
+export default function GallerySection({ content }: { content: SiteContent }) {
+  const images = content.gallery.images
   const [activeIndex, setActiveIndex] = useState<number | null>(null)
   const lightboxTrackRef = useRef<HTMLDivElement>(null)
   const wasLightboxOpenRef = useRef(false)
@@ -50,7 +52,7 @@ export default function GallerySection() {
 
   const goToNext = useCallback(() => {
     if (activeIndex === null) return
-    scrollToIndex(Math.min(GALLERY_IMAGES.length - 1, activeIndex + 1))
+    scrollToIndex(Math.min(images.length - 1, activeIndex + 1))
   }, [activeIndex, scrollToIndex])
 
   const updateIndexFromScroll = useCallback(() => {
@@ -111,14 +113,14 @@ export default function GallerySection() {
       <div className={`sectionInner ${styles.inner}`}>
         <div className={styles.header}>
           <h2 className="sectionHeading">Галерея</h2>
-          <p className="sectionSubheading">
-            Атмосфера PROяв івент, яку ми візуалізували за допомогою ШІ.
-          </p>
+          <div className="sectionSubheading">
+            <MarkdownContent>{content.gallery.subheading}</MarkdownContent>
+          </div>
         </div>
 
         <div className={styles.trackWrap}>
           <div className={styles.track}>
-            {GALLERY_IMAGES.map((src, index) => (
+            {images.map((src, index) => (
               <button
                 key={src}
                 type="button"
@@ -149,7 +151,7 @@ export default function GallerySection() {
         >
           <div className={styles.lightboxTop}>
             <p className={styles.lightboxCounter}>
-              {activeIndex + 1} / {GALLERY_IMAGES.length}
+              {activeIndex + 1} / {images.length}
             </p>
             <button
               type="button"
@@ -182,7 +184,7 @@ export default function GallerySection() {
             onClick={(event) => event.stopPropagation()}
             onScroll={updateIndexFromScroll}
           >
-            {GALLERY_IMAGES.map((src, index) => (
+            {images.map((src, index) => (
               <figure key={src} className={styles.lightboxSlide}>
                 <Image
                   src={src}
@@ -203,7 +205,7 @@ export default function GallerySection() {
               event.stopPropagation()
               goToNext()
             }}
-            disabled={activeIndex === GALLERY_IMAGES.length - 1}
+            disabled={activeIndex === images.length - 1}
             aria-label="Наступне фото"
           >
             <ArrowIcon />
